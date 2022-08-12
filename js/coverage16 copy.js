@@ -4483,7 +4483,7 @@ var coverage = {
 //     }
 // }).addTo(map);
 // console.log("????");
-L.geoJSON(coverage.features, {
+L.geoJson(coverage.features, {
     style: function(feature) {
         if (feature.properties.Label <= 12) {
             return {color: "#ff0000"};

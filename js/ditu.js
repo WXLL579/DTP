@@ -1,51 +1,18 @@
-// var map = L.map('map');
-//     var baseLayers = {
-//         "高德地图": L.tileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
-//             subdomains: "1234"
-//         }),
-//         '高德影像': L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
-//             subdomains: "1234"
-//         }), L.tileLayer('http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}', {
-//             subdomains: "1234"
-//         })]),
-//         "立体地图": L.tileLayer('https://a.tiles.mapbox.com/v3/examples.c7d2024a/{z}/{x}/{y}.png', {
-//             attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-//             key: 'BC9A493B41014CAABB98F0471D759707',
-//             styleId: 22677
-//         }),
-//         "Foursquare": L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
-//             attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-//             key: 'BC9A493B41014CAABB98F0471D759707',
-//             styleId: 22677
-//         }),
-//         'GeoQ灰色底图': L.tileLayer('http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}').addTo(map)
-//     };
-//     L.tileLayer('https://a.tiles.mapbox.com/v3/foursquare.map-0y1jh28j/{z}/{x}/{y}.png', {
-//         attribution: 'Map &copy; Pacific Rim Coordination Center (PRCC).  Certain data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-//         key: 'BC9A493B41014CAABB98F0471D759707',
-//         styleId: 22677
-//     });
-//     var layercontrol = L.control.layers(baseLayers,{}, {
-//         position: "topleft"
-//     }).addTo(map);
 var imgm = L.tileLayer(
-    "//t{s}.tianditu.gov.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}&tk=63235749c4ba1f4c5546d3c6dadb45a2"
-    , {
-        maxZoom: 18,
-        minZoom: 1,
-        subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
-    }),
+        "//t{s}.tianditu.gov.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}&tk=63235749c4ba1f4c5546d3c6dadb45a2", {
+            maxZoom: 18,
+            minZoom: 1,
+            subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
+        }),
     imga = L.tileLayer(
-        "//t{s}.tianditu.gov.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}&tk=63235749c4ba1f4c5546d3c6dadb45a2"
-        , {
+        "//t{s}.tianditu.gov.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}&tk=63235749c4ba1f4c5546d3c6dadb45a2", {
             maxZoom: 18,
             minZoom: 1,
             subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
 
         }),
     normalm = L.tileLayer(
-        "//t{s}.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk=63235749c4ba1f4c5546d3c6dadb45a2"
-        , {
+        "//t{s}.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk=63235749c4ba1f4c5546d3c6dadb45a2", {
             maxZoom: 18,
             minZoom: 1,
             subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
@@ -61,8 +28,7 @@ var imgm = L.tileLayer(
 
         });
 Geoq = L.tileLayer(
-    'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}'
-    , {
+    'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 16,
         minZoom: 1,
         subdomains: [],
@@ -80,8 +46,7 @@ var baseLayers = {
 }
 
 
-var overlayLayers = {
-}
+var overlayLayers = {}
 
 
 var map = L.map("map", {
@@ -95,29 +60,30 @@ var map = L.map("map", {
 })
 
 L.control.layers(baseLayers, overlayLayers).addTo(map); //图层控件
-var marker = L.marker([30, 109.05]).addTo(map); 
+var marker = L.marker([30, 109.05]).addTo(map);
 var polygon = L.polygon([
     [30, 109.05],
     [37, 121],
     [36.5, 122],
     [36.5, 150]
-],{
+], {
     color: 'red',
     fillColor: 'red',
-//   fillOpacity: 1
+    //   fillOpacity: 1
 }).addTo(map);
 map.setView(L.latLng(37.550339, 104.114129), 4);
-var overlay = new L.echartsLayer3(map, echarts);
-var chartsContainer = overlay.getEchartsContainer();
-var myChart = overlay.initECharts(chartsContainer);
-    // var latlang = [
-    //     [[17.385044, 78.486671], [16.506174, 80.648015], [17.686816, 83.218482],[37.550339, 104.114129]],
-    //     [[13.082680, 80.270718], [12.971599, 77.594563],[15.828126, 78.037279]]
-    //  ];
-    //  var multiPolyLineOptions = {color:'red'};
-    // // Creating multi polylines
-    // var multipolyline = L.multiPolyline(latlang , multiPolyLineOptions);
-    // multipolyline.addTo(map);
+
+// var overlay = new L.echartsLayer3(map, echarts);
+// var chartsContainer = overlay.getEchartsContainer();
+// var myChart = overlay.initECharts(chartsContainer);
+// var latlang = [
+//     [[17.385044, 78.486671], [16.506174, 80.648015], [17.686816, 83.218482],[37.550339, 104.114129]],
+//     [[13.082680, 80.270718], [12.971599, 77.594563],[15.828126, 78.037279]]
+//  ];
+//  var multiPolyLineOptions = {color:'red'};
+// // Creating multi polylines
+// var multipolyline = L.multiPolyline(latlang , multiPolyLineOptions);
+// multipolyline.addTo(map);
 
 //     var geoCoordMap = {
 //         '上海': [121.4648, 31.2891],
@@ -235,7 +201,7 @@ var myChart = overlay.initECharts(chartsContainer);
 //         '青岛': [120.4651, 36.3373],
 //         '韶关': [113.7964, 24.7028]
 //     };
- 
+
 //     var BJData = [
 //         [{name: '北京'}, {name: '上海', value: 95}],
 //         // [{name: '北京'}, {name: '广州', value: 90}],
@@ -248,7 +214,7 @@ var myChart = overlay.initECharts(chartsContainer);
 //         // [{name: '北京'}, {name: '重庆', value: 20}],
 //         // [{name: '北京'}, {name: '常州', value: 10}]
 //     ];
- 
+
 //     var SHData = [
 //         [{name: '上海'}, {name: '包头', value: 95}],
 //         [{name: '上海'}, {name: '昆明', value: 90}],
@@ -261,7 +227,7 @@ var myChart = overlay.initECharts(chartsContainer);
 //         [{name: '上海'}, {name: '丹东', value: 20}],
 //         [{name: '上海'}, {name: '大连', value: 10}]
 //     ];
- 
+
 //     var GZData = [
 //         [{name: '广州'}, {name: '福州', value: 95}],
 //         [{name: '广州'}, {name: '太原', value: 90}],
@@ -274,9 +240,9 @@ var myChart = overlay.initECharts(chartsContainer);
 //         [{name: '广州'}, {name: '北海', value: 20}],
 //         [{name: '广州'}, {name: '海口', value: 10}]
 //     ];
- 
+
 //     var planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
- 
+
 //     var convertData = function (data) {
 //         var res = [];
 //         for (var i = 0; i < data.length; i++) {
@@ -298,7 +264,7 @@ var myChart = overlay.initECharts(chartsContainer);
 //     //     iconSize: 30,
 //     //     iconAnchor: [15, 15],
 //     // });
-    
+
 //     // var huailai_diqiuzhan_weizhi = [40.39, 115.09];
 //     // var beijing_diqiuzhan_weizhi = [40.05, 116.28];
 //     // var dujiangyan_diqiuzhan_weizhi = [31.0, 103.62];
@@ -320,32 +286,32 @@ var myChart = overlay.initECharts(chartsContainer);
 //     //     iconSize: 30,
 //     //     iconAnchor: [15, 15]
 //     // });
-    
+
 //     // var weixing_weizhi_1 = [50, 110.5];
-    
+
 //     // var weixing_marker_1 = L.marker(weixing_weizhi_1, {
 //     //     icon: weixing
 //     // }).addTo(map);
-    
+
 //     // var qidian_icon = L.icon({
 //     //     iconUrl: 'images/qidian.png',
 //     //     iconSize: 20,
 //     //     iconAnchor: [10, 10]
 //     // });
-    
+
 //     // var zhongdian_icon = L.icon({
 //     //     iconUrl: 'images/zhongdian.png',
 //     //     iconSize: 20,
 //     //     iconAnchor: [10, 10]
 //     // });
-    
+
 //     // var planeIcon = L.icon({
 //     //     iconSize: [37, 26],
 //     //     iconAnchor: [19, 13],
 //     //     iconUrl: './images/plane.png'
 //     // })
 //     /////////////////////////////////////////////
-    
+
 //     // var marker_json = {
 //     //     "diqiuzhan": {
 //     //         "huailai":{
@@ -358,13 +324,13 @@ var myChart = overlay.initECharts(chartsContainer);
 //     //             "weizhi":beijing_diqiuzhan_weizhi,
 //     //             "marker":beijing_diqiuzhan_marker,
 //     //         },
-        
+
 //     //         "dujiangyan":{
 //     //             "icon":diqiuzhan,
 //     //             "weizhi":dujiangyan_diqiuzhan_weizhi,
 //     //             "marker":dujiangyan_diqiuzhan_marker,
 //     //         },
-            
+
 //     //         "kashi":{
 //     //             "icon":diqiuzhan,
 //     //             "weizhi":kashi_diqiuzhan_weizhi,
@@ -392,40 +358,40 @@ var myChart = overlay.initECharts(chartsContainer);
 //         //         "upspeed":80,
 //         //         "downspeed":10,
 //         //         'marker_status':false
-    
+
 //         //     },
 //         //     "leida_3":{
 //         //         "icon":leida3,
 //         //         "upspeed":10,
 //         //         "downspeed":50,
 //         //         'marker_status':false
-    
+
 //         //     },
 //         //     "leida_4":{
 //         //         "icon":leida4,
 //         //         "upspeed":20,
 //         //         "downspeed":30,
 //         //         'marker_status':false
-    
+
 //         //     },
 //         //     "leida_5":{
 //         //         "icon":leida5,
 //         //         "upspeed":40,
 //         //         "downspeed":50,
 //         //         'marker_status':false
-    
+
 //         //     },
 //         //     "leida_6":{
 //         //         "icon":leida6,
 //         //         "upspeed":60,
 //         //         "downspeed":70,
 //         //         'marker_status':false
-    
+
 //         //     }
 //         // }
 //     // };
 
-    
+
 //     //线的颜色(字体颜色也是)
 //     var color = ['red', '#ffa022', '#46bee9'];
 //     var series = [];
@@ -502,7 +468,7 @@ var myChart = overlay.initECharts(chartsContainer);
 //                     })
 //                 });
 //     });
- 
+
 //     option = {
 // //        backgroundColor: '#404a59',
 //         title: {

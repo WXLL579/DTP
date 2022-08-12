@@ -6,14 +6,12 @@
     <title>Leaflet 加载 Echarts3</title>
     <link rel="stylesheet" href="./style copy.css">
     <!-- 引入vue -->
+	<script src="leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
     <script src="./vue.js"></script>
-
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui@2.15.1/lib/index.js"></script>
 
-    <link rel="stylesheet" href="leaflet/leaflet.css" />
-    <script src="leaflet/leaflet.js"></script>
-    
     <!-- <script src="./js/echarts.js"></script> -->
     <!-- <link href="./leaflet/leaflet.css" rel="stylesheet" /> -->
     <style>
@@ -54,7 +52,6 @@
 		}
         
     </style>
-    <script src="./js/main.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -77,22 +74,29 @@
             </el-container>
         </el-container>
     </div>
-
-    <script>
-
-
+	<script>
         var app = new Vue({
             el: '#app',
             data: {
-            }
+				arr:{},
+				suibian:''
+            },
+			methods:{
+				yanshi(){}
+				,
+				searchSelect(){
+
+				}
+
+			}
+
 
         })
 
     </script>
-    <!-- <div id="map" style="width:100%;height:100%; "></div> -->
-    <!-- <script src="js/coverage16 copy.js"></script> -->
-    <!-- <script src="js/icon.js"></script> -->
     <script src="js/ditu.js"></script>
 	<script src="js/coverage16 copy.js"></script>
+	
+
 </body>
 </html>
