@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTP</title>
+    
+    <link rel="stylesheet" href="./style copy.css">
+    <!-- 引入vue -->
+    <script src="./vue.js"></script>
+    <!-- 引入element ui -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui@2.15.1/lib/index.js"></script>
+    <!-- 引入leaflet -->
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+	<!-- <script src="./js/echarts.js"></script> -->
+	<script src="./js/echarts.min.js" type="text/javascript"></script>
+	<style type="text/css">
+/* 		.but1 {
+
+		  color: 'black';
+		  width: 100px; 
+		  height: 40px;
+		  font-size: 15px;
+		  text-align: center;
+		  margin-top: 10px;
+		  margin-right: 10px;
+		  margin-left: 10px;
+		  font-weight: normal;
+		} */
+		/* .el-button{
+			vertical-align: top; */
+/* 			width: 100px;
+			height: 40px;
+			font-size: 15px;
+			text-align: center;
+			margin-top: 10px;
+			margin-right: 10px;
+			margin-left: 10px;
+			font-weight: normal; */
+		/* } */
+		.search-main {
+			position: absolute;
+			top: 40px;
+			bottom: 0;
+			width: 100%;
+			height: unset;
+			padding: 25px;
+			box-sizing: border-box;
+			background-image: url(http://172.16.67.32:8094/wxzy/img/8fabc8de59bc1aa70356.png);
+			background-position: top center;
+			/* background-size: 110% 103%; */
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: flex-start;
+			/* justify-content: space-between; */
+			background-color: #10223655;
+			border-radius: 15px;
+		}
+/* 		.img{
+			position:absolute; 
+			left:300px;
+			top:150px;
+		} */
+		.el-select{
+			display: block;
+			width: 150px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	</style>
+	<script type="text/javascript">
+		
+		function getMousePos(event) {
+				    var e = event || window.event;
+				    return {'x':e.screenX,'y':screenY}
+				}
+		function getStatus(row) {
+		    location.href = "./操作地图航线.html";
+		}
+		function cimsInputClick () {
+			  window.location.href = './操作地图航线.html'
+			}
+		// var points = [],geometry=[]
+		// 	var lines = new L.polyline(points)
+		// 	var tempLines = new L.polyline([])
+		// 	function onClick(e) {
+		// 		points.push([e.latlng.lat, e.latlng.lng])
+		// 		lines.addLatLng(e.latlng)
+		// 		map.addLayer(lines)
+		// 		const node=L.circle(e.latlng, { color: '#ff0000', fillColor: 'ff0000', fillOpacity: 1 })
+		// 		map.addLayer(node)
+		// 		geometry.push(node)
+		// 		map.on('mousemove', onMove)//双击地图
+
+		// 	}
+		// 	function onMove(e) {
+		// 		if (points.length > 0) {
+		// 			ls = [points[points.length - 1], [e.latlng.lat, e.latlng.lng]]
+		// 			tempLines.setLatLngs(ls)
+		// 			map.addLayer(tempLines)
+		// 		}
+		// 	}
+
+		// 	function onDoubleClick(e) {
+		// 		geometry.push(L.polyline(points).addTo(map))
+		// 		points = []
+		// 		lines.remove();            
+		// 		map.off('mousemove')
+		// 		tempLines.remove();
+		// 	}
+		// function getEcharts(){
+		// 	// Step:3 conifg ECharts's path, link to echarts.js from current page.
+		// 	// Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+		// 	require.config({
+		// 		paths: {
+		// 			echarts: './js'
+		// 		}
+		// 	});
+		// 	console.log("!!!");
+		// 	// Step:4 require echarts and use it in the callback.
+		// 	// Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+		// 	require(
+		// 		[
+		// 			'echarts',
+		// 			'map'
+		// 		],
+		// 		function (ec) {
+		// 			// --- 地图 ---
+		// 			var myChart2 = ec.init(document.getElementById('.map'));
+		// 			console.log(myChart2)
+		// 			myChart2.setOption({
+		// 				dataRange: {
+		// 					min : 0,
+		// 					max : 100,
+		// 					calculable : true,
+		// 					color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+		// 					textStyle:{
+		// 						color:'#fff'
+		// 					}
+		// 				},
+		// 				series : [
+		// 					{
+		// 						name: '全国',
+		// 						type: 'map',
+		// 						roam: true,
+		// 						hoverable: false,
+		// 						mapType: 'world',
+		// 						itemStyle:{
+		// 							normal:{
+		// 								borderColor:'rgba(100,149,237,1)',
+		// 								borderWidth:0.5,
+		// 								areaStyle:{
+		// 									color: '#1b1b1b'
+		// 								}
+		// 							}
+		// 						},
+		// 						data:[],
+		// 						markLine : {
+		// 							smooth:true,
+		// 							symbol: ['none', 'circle'],  
+		// 							symbolSize : 1,
+		// 							itemStyle : {
+		// 								normal: {
+		// 									color:'#fff',
+		// 									borderWidth:1,
+		// 									borderColor:'rgba(30,144,255,0.5)'
+		// 								}
+		// 							},
+		// 							data : [
+		// 							],
+		// 						},
+		// 						geoCoord: {
+		// 							'北京': [116.4551,40.2539],
+		// 							'广州': [113.5107,23.2196],
+		// 							'拉萨': [91.1865,30.1465],
+		// 							'长春': [125.8154,44.2584],
+		// 							'天空1': [100.9688,50.368],
+		// 						},
+		// 						markPoint : {
+		// 							symbol:'emptyCircle',
+		// 							symbolSize : function (v){
+		// 								return 10 + v/10
+		// 							},
+		// 							effect : {
+		// 								show: false,
+		// 								shadowBlur : 0
+		// 							},
+		// 							itemStyle:{
+		// 								normal:{
+		// 									label:{show:false}
+		// 								},
+		// 								emphasis: {
+		// 									label:{position:'top'}
+		// 								}
+		// 							},
+		// 							data : [
+		// 								{name:'天空1',symbol:"image://img/sat.png",symbolSize:25},
+		// 							]
+		// 						},
+		// 					},
+		// 					{
+		// 						name: '北京 Top10',
+		// 						type: 'map',
+		// 						mapType: 'world',
+		// 						data:[],
+		// 						markLine : {
+		// 							smooth:true,
+		// 							effect : {
+		// 								show: true,
+		// 								scaleSize: 1.5,
+		// 								period: 20,
+		// 								color: '#fff',
+		// 								shadowBlur: 10
+		// 							},
+		// 							itemStyle : {
+		// 								normal: {
+		// 									label:{show:false},
+		// 									borderWidth:3,
+		// 									lineStyle: {
+		// 										type: 'solid',
+		// 										shadowBlur: 10
+		// 									}
+		// 								}
+		// 							},
+		// 							data : [
+		// 								[{name:'天空1'}, {name:'北京',value:10}],
+		// 								[{name:'拉萨'}, {name:'天空1',value:70}],
+		// 								// [{name:'天空1'}, {name:'长春',value:90}],
+		// 								// [{name:'广州'}, {name:'天空1',value:90}]
+		// 							]
+		// 						},
+		// 						markPoint : {
+		// 							symbol:'emptyCircle',
+		// 							symbolSize : function (v){
+		// 								return 10 + v/10
+		// 							},
+		// 							effect : {
+		// 								show: true,
+		// 								color: 'red',
+		// 								shadowBlur : 0
+		// 							},
+		// 							itemStyle:{
+		// 								normal:{
+		// 									label:{show:true,
+		// 										position:'top',
+		// 										textStyle: {
+		// 													fontSize: 14
+		// 												}
+		// 										}
+		// 								},
+		// 								emphasis: {
+		// 									label:{show:false}
+		// 								}
+		// 							},
+		// 							data : [
+		// 								{name:'广州'},
+		// 								{name:'拉萨'},
+		// 								{name:'北京'},
+		// 								{name:'长春'},
+		// 								// {name:'北京'}
+		// 							]
+		// 						}
+		// 					}
+		// 				]
+		// 		});
+		// 	});
+		// }
+	
+</script>
+</head>
+
+<body style="background:#021e42">
+    <div id="app">
+        <el-container>
+            <el-header>DTP</el-header>
+            <el-container>
+				<el-aside style="width: 14%;">
+					<div data-v-dfcd2774 class="search-main">
+						<el-button type=text style="margin-left: 11px;" @click.native="yanshi">返回上层</el-button>
+						<el-button type=text @click.native="pickstart">发送端坐标</el-button>
+						<el-button type=text @click.native="pickstart">接收端坐标</el-button>
+						<el-select v-model="suibian" @change="searchSelect">
+							<el-option v-for="(item,index) in arr" :key="index" :label="item.label" :value="item.value"></el-option>
+						</el-select>
+					</div>
+				</el-aside>
+			<el-main>
+				<div id="map"></div>
+			</el-main>		  
+            </el-container>
+        </el-container>
+    </div>
+
+    <script>
+
+
+        var app = new Vue({
+            el: '#app',
+            data() {
+				return {
+					lng: -1000,
+					lat: -1000,
+					marker1: null,
+					exe:false,
+					endpoints:[],
+					radio:9,
+					// options: [{
+					// 	value: '选项1',
+					// 	label: '点对点'
+					// 	}, {
+					// 	value: '选项2',
+					// 	label: '波束间交换'
+					// 	}, {
+					// 	value: '选项3',
+					// 	label: '频率间交换'
+					// 	}, {
+					// 	value: '选项4',
+					// 	label: '波束间、频率间交换 以及子带功率调整'
+					// 	}, {
+					// 	value: '选项5',
+					// 	label: '广播及子带功率调整'
+					// 	},{
+					// 	value: '选项6',
+					// 	label: '组播及子带功率调整'
+					// 	},{
+					// 	value: '选项7',
+					// 	label: '子带关闭'
+					// 	}
+					// ],
+						value: '',
+						suibian:'',
+						arr:[
+							{
+							label:'点对点',
+							value:'1'
+						},
+							{
+							label:'波束间交换',
+							value:'2'
+						},
+							{
+							label:'频率间交换',
+							value:'3'
+						},
+							{
+							label:'波束间、频率间交换 以及子带功率调整',
+							value:'4'
+						},
+						{
+							label:'广播及子带功率调整',
+							value:'5'
+						},
+						{
+							label:'组播及子带功率调整',
+							value:'6'
+						},
+						{
+							label:'子带关闭',
+							value:'7'
+						},
+						]
+					}
+				},
+			methods:{
+				cimsInputClick () {
+					alert(map);
+					  // window.location.href = './img/sat.png'
+					},
+					pickstart() {
+						if(this.exe && this.lat==-1000 && this.lng==-1000){
+							alert("只能输入一个发送端");
+							
+						}
+						else{
+							this.lng = lng.toFixed(2);
+							this.lat = lat.toFixed(2);
+							this.marker1 = L.marker([this.lat, this.lng]).addTo(map)
+							this.exe=true;
+						}
+				},
+				pickends() {
+						this.lng = lng.toFixed(2);
+						this.lat = lat.toFixed(2);
+						this.marker1 = L.marker([this.lat, this.lng]).addTo(map)
+						endpoints.push([this.lat, this.lng])
+				},
+				resetPoint() {
+					map.removeLayer(this.marker1);
+					map.removeLayer(marker);
+					this.lng = 0;
+					this.lat = 0;
+					this.gridData_beam_containPoint = []
+				},
+				yanshi() {
+					if(this.exe){
+						alert("执行了");
+					}
+					else{
+						alert("没有执行");
+					}
+				},
+				searchSelect(value){
+					console.log(value);
+					this.searchConfig = value
+					if(value=="1"){ //这里还需要判断是否已经选了终点和起点
+					map.on('click', onClick);    //点击地图
+					map.on('dblclick', onDoubleClick);
+					}
+				},
+
+			},
+		});
+
+		
+    </script>
+
+    <script src="js/map.js"></script>
+    <script src="js/coverage16 copy.js"></script>
+	<!-- <script src="./js/main.min.js" type="text/javascript"></script> -->
+	<script src="js/icon.js"></script>
+	<script src="js/new area.js"></script>
+	<!-- <script src="js/ditu.js"></script> -->
+	<!-- <script src="./js/main.min.js"></script> -->
+
+</body>
+
+</html>

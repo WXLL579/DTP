@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>航线动态模拟</title>
+    <!--leaflet原生样式-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!--引入当前页面样式表-->
+    <!-- <link href="../../css/style.css" rel="stylesheet" type="text/css" /> -->
+    <!--引入leaflet脚本库-->
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!--引入leaflet-echarts3动画模拟插件-->
+    <!-- <script src="./js/main.min.js" type="text/javascript"></script> -->
+	<script src="./js/e.js"></script>
+
+    <style type="text/css">
+        body {
+            height: 700px;
+        }
+    </style>
+
+    <!-- <script type="text/javascript">
+        /**显示地图
+        */
+        function init() {
+            if (isIE()) {
+                alert("该功能不支持ie浏览器,请换浏览器使用该功能！");
+                return;
+            }
+        
+        /**判断是否为IE浏览器
+        */
+        function isIE() {
+            if (!!window.ActiveXObject || "ActiveXObject" in window)
+                return true;
+            else
+                return false;
+        }
+    </script> -->
+</head>
+<body>
+    <div id="leaf_map" style="width:100%;height:100%; "></div>
+</body>
+</html>

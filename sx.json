@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"adcode":630000,"name":"青海省","center":[101.778916,36.623178],"centroid":[96.043533,35.726403],"childrenNum":8,"level":"province","acroutes":[100000],"parent":{"adcode":100000}},"geometry":{"type":"MultiPolygon","coordinates":[[[]]]}}]}

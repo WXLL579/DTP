@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>飞线</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+        border: 0;
+        overflow: hidden;
+      }
+      #map_canvas {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+      .anchorBL{
+            display:none
+        }
+    </style>
+       
+  </head>
+ 
+  <body>
+    <div id="container" style="height: 100%"></div>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+    <!--百度地图 引入 -->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=5cmZ1GRfgYHiXDymUo7AC4FDOvBl0cK0"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+    <script>
+      var dom = document.getElementById("container");
+      var myChart = echarts.init(dom);
+ 
+      var option=null;
+ 
+      var startPoint = {
+        x: 104.114129,
+        y: 37.550339
+      };
+      // 地图
+      var bmap = {
+        center: [startPoint.x, startPoint.y],
+        zoom: 5,
+        roam: true,
+        //mapStyleV2: {
+            //设置地图自定义样式
+           // styleId: "1c9508432f1bd060b4485d79045d5bdd",
+        //  },
+      }
+ 
+     //飞线图标
+      var planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+ 
+      var series = [
+                //飞线数据
+                {
+                  name: 'wha Top2', //飞线名称
+                  type: 'lines',
+                  coordinateSystem: 'bmap',
+                  zlevel: 2,
+                  effect: {
+                    show: true,
+                    period: 6,
+                    trailLength: 0,
+                    symbol: planePath,
+                    symbolSize: 25
+                  },
+                  lineStyle: {
+                    normal: {
+                      color: '#a6c84c',
+                      width: 2,
+                      opacity: 0.8, //
+                      curveness: 0.8 //飞线弯曲度
+                    }
+                  },
+                  data: [{
+                    fromName: "起点1",
+                    toName: "终点1",
+                    coords:[[116.4551, 40.2539],[121.4648, 31.2891]]
+                  },
+				  {
+                    fromName: "起点2",
+                    toName: "终点2",
+                    coords:[[111.4551, 22.2539],[121.4648, 31.2891]]
+                  }
+				  ]
+                },
+				
+              ];
+      option = {
+        bmap: bmap,
+        tooltip: {
+          trigger: 'item'
+        },
+        series: series
+      };
+      myChart.setOption(option);
+ 
+ 
+    </script>
+  </body>
+ 
+</html>

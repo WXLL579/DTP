@@ -1,0 +1,151 @@
+​
+<!doctype html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>leaflet绘制箭头和虚线矩形</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        html,
+        body,
+        #map {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div id="map"></div>
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="text/javascript" src="./js/leaflet.polylineDecorator.js"></script>
+    <script src="./js/Leaflet.AnimatedMarker.js"></script>
+    <script type="text/javascript">
+        var map = L.map('map').setView([36.09, 120.35], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: ''
+        }).addTo(map);
+ 
+        //绘制图层
+        var drawnItems = new L.FeatureGroup();
+                    //添加绘制图层
+                    map.addLayer(drawnItems);
+ 
+        //1.绘制线
+        var arrow = L.polyline([[36.09, 120.35], [36.10, 120.38]], {
+            //颜色
+            color: 'red'
+        }).addTo(drawnItems);
+        //添加箭头
+        var arrowHead = L.polylineDecorator(arrow, {
+            //添加模式
+            patterns: [{
+                //模式符号的偏移位置
+                offset: '100%',
+                //模式符号的重复间隔
+                repeat: 0,
+                //符号实例
+                symbol: L.Symbol.arrowHead({
+                    //符号大小
+                    pixelSize: 15,
+                    //符号样式
+                    pathOptions: {
+                        //是否显示边线
+                        stroke: true
+                    }
+                })
+            }]
+        }).addTo(drawnItems);
+ 
+        //2.绘制虚线矩形
+        var pathPattern = L.polylineDecorator([[36.11, 120.30], [36.11, 120.33], [36.14, 120.33], [36.14, 120.30], [36.11, 120.30]], {
+            //添加模式
+            patterns: [{
+                //模式符号的偏移位置
+                offset: 12,
+                //模式符号的重复间隔
+                repeat: 25,
+                //符号实例
+                symbol: L.Symbol.dash({
+                    //符号大小
+                    pixelSize: 10,
+                    //符号样式
+                    pathOptions: {
+                        //颜色
+                        color: '#f00',
+                        //线宽
+                        weight: 2
+                    }
+                })
+            },
+                {
+                    //模式符号的偏移位置
+                    offset: 0,
+                    //模式符号的重复间隔
+                    repeat: 25,
+                    //符号实例
+                    symbol: L.Symbol.dash({
+                        //符号大小
+                        pixelSize: 0
+                    })
+                }
+            ]
+        }).addTo(drawnItems);
+ 
+        //3.绘制图案
+        var pathPattern = L.polylineDecorator([[36.15, 120.38], [36.14, 120.39], [36.13, 120.42], [36.11, 120.44], [36.09, 120.49]], {
+            //添加模式
+            patterns: [
+                {
+                    //模式符号的偏移位置
+                    offset: 0,
+                    //模式符号的重复间隔
+                    repeat: 10,
+                    //符号实例
+                    symbol: L.Symbol.dash({
+                        //符号大小
+                        pixelSize: 5,
+                        //符号样式
+                        pathOptions: {
+                            //颜色
+                            color: 'blue',
+                            //线宽
+                            weight: 1,
+                            //透明度
+                            opacity: 1
+                        }
+                    })
+                },
+                {
+                    //模式符号的偏移位置
+                    offset: '0%',
+                    //模式符号的重复间隔
+                    repeat: '20%',
+                    //符号实例
+                    symbol: L.Symbol.marker({
+                        //是否允许旋转
+                        rotate: true,
+                        //标记显示样式
+                        markerOptions: {
+                            //图标
+                            icon: L.icon({
+                                //图标地址
+                                iconUrl: './img/car.png',
+                                //图标位置
+                                iconAnchor: [16, 16]
+                            })
+                        }
+                    })
+                }
+            ]
+        }).addTo(drawnItems);
+    </script>
+</body>
+ 
+</html>
+ 
+​
